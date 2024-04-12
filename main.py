@@ -1,5 +1,6 @@
 import math
 import os
+import sys
 import json
 import subprocess
 import hashlib
@@ -209,6 +210,7 @@ def precreate_file(filename: str, md5json: str) -> str:
             fmt.error("precreate", "File precreate failed.")
             if json.loads(preresponse.text)["errmsg"] == 'need verify':
                 fmt.error("precreate", "The login session has expired. Please login again and refresh the credentials.")
+                sys.exit()
                 return "fail"
             fmt.error("precreate", "ERROR: More information: {json.loads(preresponse.text)}")
             return "fail"
