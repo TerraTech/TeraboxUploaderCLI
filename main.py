@@ -245,6 +245,8 @@ def upload_file(filename: str, uploadid: str, md5hash: str, partseq: int = 0) ->
                                  stdout=subprocess.PIPE)
         else:
             out = subprocess.run(["curl", "-X", "POST",
+                                  "--speed-limit", "1048576",
+                                  "--speed-time", "30",
                                   "-H", f"User-Agent:{useragent}",
                                   "-H", f"Origin:{baseurltb}",
                                   "-H", f"Referer:{baseurltb}/main?category=all",
