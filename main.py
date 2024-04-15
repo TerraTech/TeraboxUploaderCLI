@@ -5,6 +5,7 @@ import json
 import subprocess
 import hashlib
 import zipfile
+from fnmatch import fnmatch
 from urllib.parse import quote_plus
 from modules.encryption import Encryption, FileEncryptedException
 from modules.formatting import Formatting
