@@ -202,8 +202,7 @@ def precreate_file(filename: str, md5json: str) -> str:
             fmt.error("precreate", "File precreate failed.")
             if json.loads(preresponse.text)["errmsg"] == 'need verify':
                 fmt.error("precreate", "The login session has expired. Please login again and refresh the credentials.")
-                sys.exit()
-                return "fail"
+                return "session_expired"
             fmt.error("precreate", f"ERROR: More information: {json.loads(preresponse.text)}")
             return "fail"
     except Exception as e:
@@ -440,6 +439,8 @@ for file in files:
     if uploadid == "fail":
         errors = True
         continue
+    elif uploadid == "session_expired":
+        sys.exit()
     fmt.success("precreate", f"Precreate for upload ID \"{uploadid}\" successful.")
     cloudpath = remoteloc + "/" + file['name']
 
